@@ -14,6 +14,7 @@
  */
 
 const puppeteer = require("puppeteer");
+const { execSync } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 
@@ -30,13 +31,69 @@ fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
 let stepNumber = 0;
 const screenshots = [];
 
+/**
+ * Capture a screenshot with a simulated browser URL bar overlaid at the top.
+ * This injects a fixed-position bar showing the current URL, captures the
+ * screenshot, then removes it — giving the appearance of the full browser window.
+ */
 async function screenshot(page, name, description) {
   stepNumber++;
   const filename = `${String(stepNumber).padStart(2, "0")}_${name}.png`;
   const filepath = path.join(SCREENSHOT_DIR, filename);
+  const currentUrl = page.url();
+
+  // Inject a URL bar overlay at the top of the page
+  await page.evaluate((url) => {
+    const bar = document.createElement("div");
+    bar.id = "__url_bar_overlay__";
+    bar.style.cssText = `
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999999;
+      height: 40px; background: #dee1e6; display: flex; align-items: center;
+      padding: 0 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px; border-bottom: 1px solid #c4c7cc;
+    `;
+    // Back/forward/reload icons
+    const navIcons = document.createElement("div");
+    navIcons.style.cssText = "display: flex; gap: 8px; margin-right: 12px; color: #5f6368;";
+    navIcons.innerHTML = `
+      <span style="font-size: 16px; opacity: 0.4;">&#x276E;</span>
+      <span style="font-size: 16px; opacity: 0.4;">&#x276F;</span>
+      <span style="font-size: 16px; opacity: 0.6;">&#x21BB;</span>
+    `;
+    bar.appendChild(navIcons);
+    // URL input field
+    const urlBox = document.createElement("div");
+    urlBox.style.cssText = `
+      flex: 1; background: #fff; border-radius: 20px; padding: 6px 14px;
+      font-size: 13px; color: #202124; display: flex; align-items: center;
+      border: 1px solid #dfe1e5;
+    `;
+    const lockIcon = document.createElement("span");
+    lockIcon.textContent = "🔒 ";
+    lockIcon.style.cssText = "font-size: 12px; margin-right: 4px;";
+    urlBox.appendChild(lockIcon);
+    const urlText = document.createElement("span");
+    urlText.textContent = url.replace("https://", "");
+    urlBox.appendChild(urlText);
+    bar.appendChild(urlBox);
+    document.body.appendChild(bar);
+    // Push body content down
+    document.body.style.marginTop = "40px";
+  }, currentUrl);
+
+  await new Promise((r) => setTimeout(r, 300));
   await page.screenshot({ path: filepath, fullPage: false });
-  screenshots.push({ filename, description, step: stepNumber });
+
+  // Remove the overlay
+  await page.evaluate(() => {
+    const bar = document.getElementById("__url_bar_overlay__");
+    if (bar) bar.remove();
+    document.body.style.marginTop = "";
+  });
+
+  screenshots.push({ filename, description, step: stepNumber, url: currentUrl });
   console.log(`  [screenshot ${stepNumber}] ${description} -> ${filename}`);
+  console.log(`  URL: ${currentUrl}`);
   return filename;
 }
 

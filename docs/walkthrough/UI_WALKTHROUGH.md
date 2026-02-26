@@ -8,7 +8,9 @@ This walkthrough shows how to create a task for the Vibe Kanban Executor module 
 
 ## Step 1: Open the Istari Dashboard
 
-Navigate to your Istari instance (e.g. `https://demo.istari.app`). The left sidebar has three main sections: **Systems**, **Files**, and **Jobs**.
+Navigate to your Istari instance (e.g. [`https://demo.istari.app`](https://demo.istari.app)). The left sidebar has three main sections: **Systems**, **Files**, and **Jobs**.
+
+> URL: `https://demo.istari.app/systems`
 
 ![Systems page — starting point](images/01_systems.png)
 
@@ -17,6 +19,8 @@ Navigate to your Istari instance (e.g. `https://demo.istari.app`). The left side
 ## Step 2: Navigate to Files
 
 Click **Files** in the left sidebar. This shows all uploaded files in your workspace — SysML models, JSON input files, and other artifacts. The **+ Add files** button in the top-right corner is how you upload new files.
+
+> URL: `https://demo.istari.app/files`
 
 ![Files page — list of uploaded files](images/02_files_page.png)
 
@@ -32,22 +36,6 @@ Click the **+ Add files** button. A dialog appears with two tabs:
 Click **+ Choose Files** to select your task JSON from your local machine.
 
 ![Add Files dialog — Upload tab](images/03_add_files_dialog.png)
-
----
-
-## Step 4: Select Your Task File
-
-Browse to your task JSON file and select it. The **Upload Files** dialog shows the file ready to upload. You can:
-
-- Edit the **File name** (defaults to the filename without extension)
-- Set an **External Version** (optional)
-- Add **Tags** for organization
-
-Here we're uploading `research_task.json` — a task that asks an AI agent to research CD/DC and explain how it relates to Istari.
-
-Click **Upload** to upload the file to your workspace.
-
-![Upload Files dialog — research_task selected](images/04_file_selected.png)
 
 <details>
 <summary>Example task file contents</summary>
@@ -66,42 +54,80 @@ See [Task File Format](../../README.md#4-task-file-format) for all available fie
 
 ---
 
-## Step 5: Open the Uploaded File
+## Step 4: View the Uploaded File
 
-After uploading, find your file in the Files list and click on it. The right panel shows file details including metadata, version history, and — most importantly — the **Create job** button.
+After uploading, click on your file in the Files list. Istari assigns a deep link to every file:
 
-> **Tip:** If you have many files, use the pagination at the bottom or the filter icon to narrow the list.
+> URL: `https://demo.istari.app/files/{file_id}/{version_id}`
 
----
+The right panel shows:
+- File metadata (created date, author, size, MIME type)
+- Description
+- JSON content preview (expandable)
+- **Activity** section showing past job executions
+- **+ Create job** button at the bottom
 
-## Step 6: Create a Job
-
-Click the **Create job** button on the file detail panel. A dialog appears asking you to select which function (tool) should process this file.
-
----
-
-## Step 7: Select the VK Executor Function
-
-In the **Create Job** dialog, click the function dropdown to see all available tools. Select **Vibe Kanban** (listed as `engineering_tools / @vibekanban:vk_executor`).
-
-Then click **Execute Function** to submit the job. The Istari agent will claim the job and begin execution.
+![File detail page — task JSON with deep link URL](images/04_file_detail.png)
 
 ---
 
-## Step 8: Monitor the Job
+## Step 5: Create a Job
+
+Click the **+ Create job** button at the bottom of the file detail panel. The **Create Job** dialog appears with:
+
+- **Tool/Function Combination** — dropdown to select which module processes this file
+- **Advanced options** — optional configuration
+- **Execute Function** — submit button
+
+> URL remains the file deep link: `https://demo.istari.app/files/{file_id}/{version_id}`
+
+![Create Job dialog — select a tool/function](images/05_create_job_dialog.png)
+
+---
+
+## Step 6: Select the VK Executor Function
+
+Click the **Select a tool/function** dropdown to see all available tools installed on your agent. You'll see modules like:
+
+- **Vibe Kanban** — 1 function (`@vibekanban:vk_executor`)
+- **ntopci** — 2 functions
+- **textract** — 2 functions
+
+Select **Vibe Kanban**, then click **Execute Function** to submit the job.
+
+![Function dropdown — showing Vibe Kanban and other available tools](images/06_function_dropdown.png)
+
+---
+
+## Step 7: Monitor the Job
 
 Navigate to **Jobs** in the left sidebar to see all jobs. The jobs list shows:
 
 | Column | Description |
 |--------|-------------|
 | **Tool / Function** | The module that processed the job (e.g. `engineering_tools / @vibekanban:vk_executor`) |
-| **Job ID** | Short unique identifier |
+| **Job ID** | Short unique identifier (clickable deep link) |
 | **Started On** | Timestamp |
 | **Status** | Current state: Pending, Running, Completed, or Failed |
 
+> URL: `https://demo.istari.app/jobs`
+
 You can see the VK Executor jobs completing successfully alongside other module jobs (like SysGit's `extract_sysmlv2`).
 
-![Jobs page — showing completed VK Executor jobs](images/11_jobs_list.png)
+![Jobs page — showing completed VK Executor jobs](images/07_jobs_list.png)
+
+---
+
+## Deep Links
+
+Every resource in Istari has a deep link you can bookmark or share:
+
+| Resource | URL Pattern |
+|----------|-------------|
+| Systems | `https://demo.istari.app/systems` |
+| Files list | `https://demo.istari.app/files` |
+| File detail | `https://demo.istari.app/files/{file_id}/{version_id}` |
+| Jobs list | `https://demo.istari.app/jobs` |
 
 ---
 
@@ -176,7 +202,7 @@ See the main [README](../../README.md#9-end-to-end-usage) for more details.
 
 ## Screenshots
 
-These screenshots were captured automatically using a [Puppeteer script](../../scripts/walkthrough/capture.js) connected to a live Istari instance. To reproduce:
+These screenshots were captured automatically using a [Puppeteer script](../../scripts/walkthrough/capture.js) connected to a live Istari instance. Each screenshot includes a simulated URL bar showing the current page URL. To reproduce:
 
 ```bash
 # 1. Launch Chrome with remote debugging
@@ -187,5 +213,5 @@ open -a "Google Chrome" --args --remote-debugging-port=9222
 # 3. Run the capture script
 cd scripts/walkthrough
 npm install
-node capture.js
+node capture_v2.js
 ```
