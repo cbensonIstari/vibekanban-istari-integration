@@ -1,0 +1,6 @@
+{
+  "task_file": {
+    "type": "user_model",
+    "value": "examples/inputs/sample_task.json"
+  }
+}

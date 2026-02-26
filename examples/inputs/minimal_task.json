@@ -1,0 +1,5 @@
+{
+  "project_id": "your-vk-project-uuid",
+  "task": "Fix the login page CSS on mobile",
+  "agent": "claude-code"
+}

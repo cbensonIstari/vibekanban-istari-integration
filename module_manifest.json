@@ -1,0 +1,71 @@
+{
+  "module_key": "@vibekanban:vk_executor",
+  "module_type": "function",
+  "module_version": "1.0.0",
+  "module_display_name": "Vibe Kanban Executor",
+  "module_checksum": "",
+  "internal": false,
+  "agent_version": ">=11.0.0",
+  "authors": [
+    {
+      "name": "Chris Benson",
+      "email": "cbenson@istaridigital.com"
+    }
+  ],
+  "operating_systems": [
+    "Ubuntu 22.04",
+    "Ubuntu 24.04",
+    "macOS 15",
+    "macOS 26"
+  ],
+  "additional_configuration_required": false,
+  "tool_key": "vibekanban",
+  "tool_display_name": "Vibe Kanban",
+  "tool_versions": ["1.0.0"],
+  "functions": {
+    "@vibekanban:vk_executor": [
+      {
+        "entrypoint": "src/entrypoint.py",
+        "run_command": "python3 {entrypoint} {input_file} {output_file} {temp_dir}",
+        "function_schema": "function_schemas/vk_executor.json",
+        "display_name": "VK Executor — Create Issues & Start Workspaces",
+        "operating_systems": [
+          "Ubuntu 22.04",
+          "Ubuntu 24.04",
+          "macOS 15",
+          "macOS 26"
+        ],
+        "tool_versions": ["1.0.0"]
+      }
+    ]
+  },
+  "scripts": [
+    {
+      "operating_systems": [
+        "Ubuntu 22.04",
+        "Ubuntu 24.04",
+        "macOS 15",
+        "macOS 26"
+      ],
+      "test_unit": "scripts/test.sh"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "vibe-kanban",
+      "version": "latest",
+      "tool_type": "auxiliary_tool",
+      "display_name": "Vibe Kanban MCP Server",
+      "reason": "MCP server for issue tracking and workspace management",
+      "command": "npx -y vibe-kanban@latest --mcp"
+    },
+    {
+      "name": "node",
+      "version": ">=18.0.0",
+      "tool_type": "auxiliary_tool",
+      "display_name": "Node.js",
+      "reason": "Required to run the Vibe Kanban MCP server via npx"
+    }
+  ],
+  "dev_dependencies": null
+}

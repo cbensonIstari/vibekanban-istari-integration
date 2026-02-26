@@ -1,0 +1,35 @@
+{
+  "project": "Implement user authentication for the API",
+  "project_id": "cb527bb0-2050-4773-b09a-ebe16e692209",
+  "executed_at": "2026-02-26T12:21:04.435952+00:00",
+  "source": {},
+  "summary": {
+    "total_steps": 2,
+    "succeeded": 2,
+    "failed": 0,
+    "total_tasks": 1,
+    "total_workspaces": 1
+  },
+  "results": [
+    {
+      "action": "create_task",
+      "title": "Implement user authentication for the API",
+      "status": "success",
+      "task_id": "0fdf0607-f0a9-4ee2-ab0d-9b364eea3754",
+      "detail": {
+        "issue_id": "0fdf0607-f0a9-4ee2-ab0d-9b364eea3754"
+      }
+    },
+    {
+      "action": "start_workspace",
+      "title": "Implement user authentication for the API",
+      "status": "success",
+      "task_id": "0fdf0607-f0a9-4ee2-ab0d-9b364eea3754",
+      "workspace_id": "7e620877-b82b-4663-851b-d75db14205de",
+      "executor": "claude-code",
+      "detail": {
+        "workspace_id": "7e620877-b82b-4663-851b-d75db14205de"
+      }
+    }
+  ]
+}

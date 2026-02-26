@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "task_file": {
+      "type": "user_model",
+      "validation_types": ["@extension:json"],
+      "display_name": "Task File (JSON with project_id, task, agent)"
+    }
+  },
+  "outputs": [
+    {
+      "name": "execution_report",
+      "type": "file",
+      "required": true,
+      "upload_as": "artifact",
+      "display_name": "Execution Report (JSON)"
+    },
+    {
+      "name": "execution_report_html",
+      "type": "file",
+      "required": false,
+      "upload_as": "artifact",
+      "display_name": "Execution Report (HTML)"
+    }
+  ]
+}

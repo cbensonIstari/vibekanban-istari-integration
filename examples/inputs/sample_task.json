@@ -1,0 +1,6 @@
+{
+  "project_id": "your-vk-project-uuid",
+  "task": "Implement user authentication for the API",
+  "agent": "claude-code",
+  "repo_id": "your-vk-repo-uuid"
+}
