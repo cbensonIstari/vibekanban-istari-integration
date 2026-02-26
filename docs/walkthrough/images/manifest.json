@@ -1,0 +1,72 @@
+[
+  {
+    "filename": "01_systems.png",
+    "description": "Systems page — starting point",
+    "step": 1
+  },
+  {
+    "filename": "02_files_page.png",
+    "description": "Files page — list of all uploaded files",
+    "step": 2
+  },
+  {
+    "filename": "03_add_files_dialog.png",
+    "description": "Add files dialog — Upload tab",
+    "step": 3
+  },
+  {
+    "filename": "04_file_selected.png",
+    "description": "Task file selected — research_task.json",
+    "step": 4
+  },
+  {
+    "filename": "05_file_uploaded.png",
+    "description": "File uploaded to Istari",
+    "step": 5
+  },
+  {
+    "filename": "06_file_detail.png",
+    "description": "File detail page — with Create Job button",
+    "step": 6
+  },
+  {
+    "filename": "07_create_job_dialog.png",
+    "description": "Create job dialog — select function",
+    "step": 7
+  },
+  {
+    "filename": "08_function_dropdown_open.png",
+    "description": "Function dropdown — showing available tools",
+    "step": 8
+  },
+  {
+    "filename": "09_function_selected.png",
+    "description": "Function selected — VK Executor",
+    "step": 9
+  },
+  {
+    "filename": "10_job_created.png",
+    "description": "Job created — redirected to job view",
+    "step": 10
+  },
+  {
+    "filename": "11_jobs_list.png",
+    "description": "Jobs page — job appears in list",
+    "step": 11
+  },
+  {
+    "filename": "12_job_progress.png",
+    "description": "Job progress — agent processing",
+    "step": 12
+  },
+  {
+    "filename": "13_job_complete.png",
+    "description": "Job completed",
+    "step": 13
+  },
+  {
+    "filename": "14_job_detail.png",
+    "description": "Job detail — execution results and artifacts",
+    "step": 14
+  }
+]
