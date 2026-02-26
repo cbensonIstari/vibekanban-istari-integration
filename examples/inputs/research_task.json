@@ -1,0 +1,6 @@
+{
+  "project_id": "your-vk-project-uuid",
+  "task": "Go learn more about CD/DC at https://cdfam.com/cd-dc-26/ and explain how it relates to Istari",
+  "agent": "claude-code",
+  "repo_id": "your-vk-repo-uuid"
+}
