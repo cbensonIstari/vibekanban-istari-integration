@@ -2,7 +2,7 @@
   "module_key": "@vibekanban:vk_executor",
   "module_type": "function",
   "module_version": "1.0.0",
-  "module_display_name": "Vibe Kanban Executor",
+  "module_display_name": "Vibe Kanban",
   "module_checksum": "",
   "internal": false,
   "agent_version": ">=11.0.0",
