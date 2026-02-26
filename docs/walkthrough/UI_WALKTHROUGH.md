@@ -37,6 +37,22 @@ Click **+ Choose Files** to select your task JSON from your local machine.
 
 ![Add Files dialog — Upload tab](images/03_add_files_dialog.png)
 
+---
+
+## Step 4: Upload Your Task File
+
+Browse to your task JSON file and select it. The **Upload Files** dialog shows the file ready to upload. You can:
+
+- Edit the **File name** (defaults to the filename without extension)
+- Set an **External Version** (optional)
+- Add **Tags** for organization
+
+Here we're uploading `research_task_upload.json` — a task that asks an AI agent to research CD/DC and explain how it relates to Istari.
+
+Click **Upload** to upload the file to your workspace.
+
+![Upload Files dialog — research_task_upload selected](images/04_file_upload.png)
+
 <details>
 <summary>Example task file contents</summary>
 
@@ -54,24 +70,24 @@ See [Task File Format](../../README.md#4-task-file-format) for all available fie
 
 ---
 
-## Step 4: View the Uploaded File
+## Step 5: View the Uploaded File
 
-After uploading, click on your file in the Files list. Istari assigns a deep link to every file:
+Click on your file in the Files list. Istari assigns a **deep link** to every file version:
 
-> URL: `https://demo.istari.app/files/{file_id}/{version_id}`
+> URL: [`https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905`](https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905)
 
 The right panel shows:
-- File metadata (created date, author, size, MIME type)
-- Description
-- JSON content preview (expandable)
-- **Activity** section showing past job executions
-- **+ Create job** button at the bottom
+- **Breadcrumb**: `Files / research_task_upload`
+- File metadata (created date, author, size, extension)
+- **JSON content preview** — you can see the full task definition inline
+- **Activity** section at the bottom showing past job executions
+- **+ Create job** button
 
-![File detail page — task JSON with deep link URL](images/04_file_detail.png)
+![File detail page — CD/DC research task with deep link URL](images/05_file_detail.png)
 
 ---
 
-## Step 5: Create a Job
+## Step 6: Create a Job
 
 Click the **+ Create job** button at the bottom of the file detail panel. The **Create Job** dialog appears with:
 
@@ -79,34 +95,32 @@ Click the **+ Create job** button at the bottom of the file detail panel. The **
 - **Advanced options** — optional configuration
 - **Execute Function** — submit button
 
-> URL remains the file deep link: `https://demo.istari.app/files/{file_id}/{version_id}`
-
-![Create Job dialog — select a tool/function](images/05_create_job_dialog.png)
+![Create Job dialog — select a tool/function](images/06_create_job_dialog.png)
 
 ---
 
-## Step 6: Select the VK Executor Function
+## Step 7: Select the VK Executor Function
 
 Click the **Select a tool/function** dropdown to see all available tools installed on your agent. You'll see modules like:
 
 - **Vibe Kanban** — 1 function (`@vibekanban:vk_executor`)
-- **ntopci** — 2 functions
-- **textract** — 2 functions
+- **ntopci** — 2 functions (`@ntop:setup_run`, `@ntop:run_model`)
+- **textract** — 2 functions (`@istari:parse_json_fields`, `@istari:extract`)
 
 Select **Vibe Kanban**, then click **Execute Function** to submit the job.
 
-![Function dropdown — showing Vibe Kanban and other available tools](images/06_function_dropdown.png)
+![Function dropdown — showing Vibe Kanban and other available tools](images/07_function_dropdown.png)
 
 ---
 
-## Step 7: Monitor the Job
+## Step 8: Monitor the Job
 
 Navigate to **Jobs** in the left sidebar to see all jobs. The jobs list shows:
 
 | Column | Description |
 |--------|-------------|
 | **Tool / Function** | The module that processed the job (e.g. `engineering_tools / @vibekanban:vk_executor`) |
-| **Job ID** | Short unique identifier (clickable deep link) |
+| **Job ID** | Short unique identifier (clickable) |
 | **Started On** | Timestamp |
 | **Status** | Current state: Pending, Running, Completed, or Failed |
 
@@ -114,7 +128,7 @@ Navigate to **Jobs** in the left sidebar to see all jobs. The jobs list shows:
 
 You can see the VK Executor jobs completing successfully alongside other module jobs (like SysGit's `extract_sysmlv2`).
 
-![Jobs page — showing completed VK Executor jobs](images/07_jobs_list.png)
+![Jobs page — showing completed VK Executor jobs](images/08_jobs_list.png)
 
 ---
 
@@ -122,12 +136,12 @@ You can see the VK Executor jobs completing successfully alongside other module 
 
 Every resource in Istari has a deep link you can bookmark or share:
 
-| Resource | URL Pattern |
-|----------|-------------|
-| Systems | `https://demo.istari.app/systems` |
-| Files list | `https://demo.istari.app/files` |
-| File detail | `https://demo.istari.app/files/{file_id}/{version_id}` |
-| Jobs list | `https://demo.istari.app/jobs` |
+| Resource | URL Pattern | Example |
+|----------|-------------|---------|
+| Systems | `https://demo.istari.app/systems` | |
+| Files list | `https://demo.istari.app/files` | |
+| File detail | `https://demo.istari.app/files/{file_id}/{version_id}` | [`7a00052a.../d39b083d...`](https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905) |
+| Jobs list | `https://demo.istari.app/jobs` | |
 
 ---
 

@@ -18,32 +18,32 @@
     "url": "https://demo.istari.app/files"
   },
   {
-    "filename": "04_file_detail.png",
-    "description": "File detail — task JSON with deep link URL",
+    "filename": "04_file_upload.png",
+    "description": "Upload Files dialog — research_task_upload.json selected",
     "step": 4,
-    "url": "https://demo.istari.app/files/331e5161-b351-4952-8910-a6f0103c0071/068eb043-7623-46d5-a935-ab0f0b47556b"
+    "url": "https://demo.istari.app/files"
   },
   {
-    "filename": "05_create_job_dialog.png",
-    "description": "Create Job dialog — select a tool/function",
+    "filename": "05_file_detail.png",
+    "description": "File detail — CD/DC research task with deep link URL",
     "step": 5,
-    "url": "https://demo.istari.app/files/331e5161-b351-4952-8910-a6f0103c0071/068eb043-7623-46d5-a935-ab0f0b47556b"
+    "url": "https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905"
   },
   {
-    "filename": "06_function_dropdown.png",
-    "description": "Function dropdown — showing Vibe Kanban and other tools",
+    "filename": "06_create_job_dialog.png",
+    "description": "Create Job dialog — select a tool/function",
     "step": 6,
-    "url": "https://demo.istari.app/files/331e5161-b351-4952-8910-a6f0103c0071/068eb043-7623-46d5-a935-ab0f0b47556b"
+    "url": "https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905"
   },
   {
-    "filename": "07_jobs_list.png",
-    "description": "Jobs page — completed VK Executor jobs",
+    "filename": "07_function_dropdown.png",
+    "description": "Function dropdown — showing Vibe Kanban and other tools",
     "step": 7,
-    "url": "https://demo.istari.app/jobs"
+    "url": "https://demo.istari.app/files/7a00052a-e582-4186-bda6-a25524a5a9e3/d39b083d-3454-42ab-9c87-fab5db149905"
   },
   {
-    "filename": "08_job_detail.png",
-    "description": "Job detail — execution results",
+    "filename": "08_jobs_list.png",
+    "description": "Jobs page — completed VK Executor jobs",
     "step": 8,
     "url": "https://demo.istari.app/jobs"
   }
