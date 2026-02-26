@@ -355,6 +355,21 @@ c.add_job(model_id, "@vibekanban:vk_executor")
 c.add_job(model_id, "@vibekanban:vk_executor", {})
 ```
 
+### Tool name in UI doesn't update after changing `tool_display_name`
+
+**Root cause:** The `tool_key` is locked at module creation time. The Istari UI derives the tool label from the `tool_key` or original `tool_display_name`. Updating `tool_display_name` in later publishes may not change what the UI shows.
+
+**Fix:** There is no self-service fix. Either:
+- Choose your `tool_key` carefully on the first publish (it becomes permanent)
+- Ask an Istari platform admin to rename the tool
+- Create a new module with a different `module_key` and `tool_key`
+
+### Publish fails with "Module tool X does not match manifest tool Y"
+
+**Root cause:** You changed the `tool_key` in `module_manifest.json` after the module was already registered with the old key.
+
+**Fix:** Revert `tool_key` to the original value. It cannot be changed after the first publish.
+
 ### Agent token vs CLI token permissions
 
 The Istari agent token and CLI token are different users with different permission scopes:
@@ -391,6 +406,36 @@ For `user_model` inputs, you don't pass separate parameters when creating a job.
 ### `stari client publish` is the source of truth
 
 Publishing via `stari client publish module_manifest.json` registers the function version with proper permissions. Local-only installs work for the agent to run the code, but the registry needs to know about the function for job matching to work.
+
+### `tool_key` is permanent
+
+The `tool_key` in `module_manifest.json` is locked at module creation time. Once a module is published with `"tool_key": "engineering_tools"`, the registry will reject any publish that changes it (400: "Module tool X does not match manifest tool Y"). The `tool_display_name` field *can* be updated in subsequent publishes, but the Istari UI may still derive the label shown in the function picker from the `tool_key` or from the original registration. If the display name matters to you, choose your `tool_key` carefully on the first publish.
+
+### SDK methods return objects, not strings
+
+Most Istari SDK methods (`add_model`, `add_job`, `get_job`) return rich objects, not string IDs. Always extract `.id` before passing to other methods:
+
+```python
+model = c.add_model("task.json", description="...")
+model_id = model.id   # string UUID
+
+job = c.add_job(model_id, "@vibekanban:vk_executor")
+job_id = job.id       # string UUID
+
+job = c.get_job(job_id)
+status = job.status_history[-1].name.value  # e.g. "Completed"
+```
+
+### Local testing vs agent execution
+
+The entrypoint supports two modes. When run locally, `input.json` IS the task file directly. When run by the Istari agent, `input.json` contains a `task_file` key pointing to the uploaded file's path on disk. Design your entrypoint to handle both:
+
+```python
+if "task_file" in inputs:
+    task_data = json.loads(Path(inputs["task_file"]).read_text())
+else:
+    task_data = inputs  # local mode — input IS the task
+```
 
 ---
 
